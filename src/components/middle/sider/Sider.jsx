@@ -9,9 +9,9 @@ const {Title} = Typography
 
 export default function NavSider() {
   return (
-    <Sider width={'200px'} className="site-layout-background">
-      <Title style={{ marginLeft:15, marginTop:10 }}
-       level={4}>Schemas</Title>
+    <Sider width={'250px'} className="site-layout-background">
+      {/* <Title style={{ marginLeft:15, marginTop:10 }}
+       level={4}>Schemas</Title> */}
       <Menu
         mode="inline"
         defaultSelectedKeys={['1']}

@@ -8,14 +8,15 @@ export default function NavHeader() {
   const { Header, Footer, Sider, Content } = Layout;
   const { SubMenu } = Menu;
   const  headers  = [
-    {name:'Database Management', to:'/'},
+    {name:'Home', to:'/'},
+    {name:'Global Power Plants Database', to:'/db'}
   ]
   return (
     <div>
       <Layout>
         <Header>
           <div className="logo" />
-          <Menu selectedKeys={['2']}  theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+          <Menu selectedKeys={['3']}  theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
             {
                 headers.map((header, i) => <MyNavLink key={i + 1} to={header.to} >{header.name}</MyNavLink>)
             }
