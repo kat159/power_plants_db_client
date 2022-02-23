@@ -32,7 +32,6 @@ export default function DataRow() {
     const [updatingData, setUpdaingData] = useState(-1);
     const onDeleteSelected = () => {
         setLoading(true);
-        // AJAX 请求
         console.log(selectedRowKeys);
         const helper = async () => {
             for (const rowKey of selectedRowKeys) {
@@ -109,10 +108,7 @@ export default function DataRow() {
                             </Popconfirm>
                             <a onClick={() => handleUpdate(record.fuel_id)} >Update</a>
                         </Space>
-
                     </div>
-
-
                 ) : null,
         },
     ];

@@ -7,9 +7,6 @@ import {
   Select,
   Cascader,
   DatePicker,
-  InputNumber,
-  TreeSelect,
-  Switch,
   Space,
   message
 } from 'antd';
@@ -26,22 +23,47 @@ export default function Insert() {
     values.date_of_construction = values.date_of_construction.format('YYYY-MM-DD')
     console.log('Received values of form: ', values);
     axios({
-      method: 'post',
-      url: '/plants',
-      data: values,
+      method: 'get',
+      url: '/fuels',
+      params: {name: values.fuel}
     }).then(
       res => {
-        const results = res.data;
-        if (results.err_code === 0) {
-          message.success(results.message);
-        } else {
-          message.error(results.message);
+        console.log(values.fuel);
+        console.log('fuels results: ', res);
+        if (res.data.results.length === 0) {
+          return false;
         }
-      },
-      err => {
-        console.log(err);
+        return true;
+      }
+    ).then(
+      res => {
+        if (res === false) {
+          console.log(111111111111111);
+          message.error(`fuel ${values.fuel} is not found, you need to create the corresponding fuel first`);
+        } else {
+          axios({
+            method: 'post',
+            url: '/plants',
+            data: values,
+          }).then(
+            res => {
+              const results = res.data;
+              console.log('create:', results)
+              if (results.err_code === 0) {
+                message.success(results.message);
+              } else {
+                message.error(results.message);
+              }
+            },
+            err => {
+              console.log(222222222222222)
+              console.log(err);
+            }
+          )
+        }
       }
     )
+    
   }
   const handleClickBack = () => {
     navigate('facilities')

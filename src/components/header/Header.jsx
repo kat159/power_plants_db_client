@@ -1,12 +1,10 @@
 import React from 'react'
 import MyNavLink from '../my_components/NavMenuItem'
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Layout, Menu} from 'antd';
 import './Header.css'
 
 export default function NavHeader() {
-  const { Header, Footer, Sider, Content } = Layout;
-  const { SubMenu } = Menu;
+  const { Header} = Layout;
   const  headers  = [
     {name:'Home', to:'/'},
     {name:'Global Power Plants Database', to:'/db'}

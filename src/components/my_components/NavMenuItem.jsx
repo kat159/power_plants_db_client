@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, DatabaseOutlined, TableOutlined } from '@ant-design/icons';
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Menu } from 'antd';
 
 
 export default function NavMenuItem(props) {

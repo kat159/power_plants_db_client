@@ -1,11 +1,8 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb, Typography, } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined,   } from '@ant-design/icons';
+import { Layout, Menu} from 'antd';
 import Facilities from './tabs/facility_db_tab/Facilities';
 
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
-const {Title} = Typography
+const { Sider } = Layout;
 
 export default function NavSider() {
   return (

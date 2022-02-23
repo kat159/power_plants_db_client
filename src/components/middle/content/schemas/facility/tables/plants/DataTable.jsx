@@ -7,7 +7,9 @@ import Update from './Update';
 import ReferralInput from '../../../../../../my_components/ReferralInput';
 
 const {Option} = Select;
+
 axios.defaults.baseURL = 'http://flip3.engr.oregonstate.edu:9417'
+
 const paramsData = ['name', 'country', 'latitude', 'longitude', 'date_of_construction', 'fuel'];
 const compareOpsData = {
     name: ['='],
@@ -267,30 +269,6 @@ export default function DataRow() {
         setCurrentOp(value);
       };
     const onAddFilter = () => {
-        /*
-            name_vague: undefined, 
-            name: undefined, 
-            name_vague_tail: undefined, 
-            country: undefined, 
-            latitude: undefined, 
-            latitude_upper: undefined, 
-            latitude_lower: undefined, 
-            longitude: undefined, 
-            longitude_upper: undefined, 
-            longitude_lower: undefined, 
-            date_of_construction: undefined, 
-            date_of_construction_upper: undefined, 
-            date_of_construction_lower: undefined, 
-            fuel: undefined, 
-            limit: undefined,
-
-            name: ['match exactly', 'contains', 'starts at'],
-            country: ['='],
-            latitude: ['=', '<=', '>='],
-            longitude: ['=', '<=', '>='],
-            date_of_construction: ['=', '<=', '>='],
-            fuel: ['='],
-        */
         const value = inputValue
         if (value === undefined) {
             message.error('Input value can not be empty')
@@ -309,7 +287,6 @@ export default function DataRow() {
             param = currentOp === '=' ? 'longitude' : currentOp === '<=' ? 'longitude_upper' : 'longitude_lower' ;
         } else if (param === 'date_of_construction') {
             param = currentOp === '=' ? 'date_of_construction' : currentOp === '<=' ? 'date_of_construction_upper' : 'date_of_construction_lower' ;
-            console.log(999999999999999999999999999);
         } else if (param === 'fuel') {
             ;
         }
