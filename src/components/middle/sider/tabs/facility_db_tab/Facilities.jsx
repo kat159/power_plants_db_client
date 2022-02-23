@@ -11,7 +11,7 @@ const tables = [
   // { title: 'facility technologies', to: '/db/facility-techs' },
   // { title: 'regions', to: '/db/regions' },
   { title: 'fuels', to: '/db/fuels' },
-  { title: 'plants_fuels', to: '/db/plants-fuels' },
+  // { title: 'plants_fuels', to: '/db/plants-fuels' },
   // { title: 'technologies', to: '/db/techs' },
 ]
 

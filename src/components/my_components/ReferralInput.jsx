@@ -9,23 +9,36 @@ axios.defaults.baseURL = 'http://flip3.engr.oregonstate.edu:9417'
 
 
 
-export default function ReferralInput({}) {
+export default function ReferralInput({path, filter, setInputValue}) {
     const [values, setValues] = useState([
     ]);
 
     function onChange(value) {
+        setInputValue(value);
+        console.log('onChange: ', value);
+    }
+
+    const onSearch = (value) => {
         axios({
             method:'get',
-            url:'/keyword/plants'
-        })
+            url:'/keyword/' + path,
+            params: {...filter, name_vague_tail : value},
+        }).then(
+            result => {
+                const data = result.data.results 
+                console.log(data);
+                setValues(data)
+            }
+        )
     }
 
     return (
-        <Select
+        <Select style={{width:200}}
             showSearch
-            placeholder="Select a person"
+            placeholder=""
             optionFilterProp="children"
             onChange={onChange}
+            onSearch={onSearch}
             filterOption={(input, option) =>
                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }

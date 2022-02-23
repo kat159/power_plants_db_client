@@ -8,13 +8,13 @@ import ReferralInput from '../../../../../../my_components/ReferralInput';
 
 const {Option} = Select;
 axios.defaults.baseURL = 'http://flip3.engr.oregonstate.edu:9417'
-const paramsData = ['name', 'country', 'latitude', 'longitude', 'data_of_construct', 'fuel'];
+const paramsData = ['name', 'country', 'latitude', 'longitude', 'date_of_construction', 'fuel'];
 const compareOpsData = {
-    name: ['match exactly', 'contains', 'starts at'],
+    name: ['='],
     country: ['='],
     latitude: ['=', '<=', '>='],
     longitude: ['=', '<=', '>='],
-    data_of_construct: ['=', '<=', '>='],
+    date_of_construction: ['=', '<=', '>='],
     fuel: ['='],
 }
 export default function DataRow() {
@@ -39,6 +39,8 @@ export default function DataRow() {
         limit: undefined,
     });
     const inputP1 = useRef(null);
+    const inputP2 = useRef(null);
+    const [inputValue, setInputValue] = useState('');
     const [curParam, setCurParam] = useState('name');
     const [paramsUsed, setParamsUsed] = useState({
         name: false, country: false, latitude: false, longitude: false, date_of_construction: false, fuel: false, 
@@ -286,10 +288,10 @@ export default function DataRow() {
             country: ['='],
             latitude: ['=', '<=', '>='],
             longitude: ['=', '<=', '>='],
-            data_of_construct: ['=', '<=', '>='],
+            date_of_construction: ['=', '<=', '>='],
             fuel: ['='],
         */
-        const value = inputP1.current.state.value
+        const value = inputValue
         if (value === undefined) {
             message.error('Input value can not be empty')
             return
@@ -297,7 +299,8 @@ export default function DataRow() {
         console.log('value:', value);
         let param = curParam;
         if (param === 'name') {
-            param = currentOp === 'match exactly' ? 'name' : currentOp === 'contains' ? 'name_vague' : 'name_vague_tail';
+            // param = currentOp === 'match exactly' ? 'name' : currentOp === 'contains' ? 'name_vague' : 'name_vague_tail';
+            ;
         } else if (param === 'country') {
             ;
         } else if (param === 'latitude') {
@@ -306,14 +309,16 @@ export default function DataRow() {
             param = currentOp === '=' ? 'longitude' : currentOp === '<=' ? 'longitude_upper' : 'longitude_lower' ;
         } else if (param === 'date_of_construction') {
             param = currentOp === '=' ? 'date_of_construction' : currentOp === '<=' ? 'date_of_construction_upper' : 'date_of_construction_lower' ;
+            console.log(999999999999999999999999999);
         } else if (param === 'fuel') {
             ;
         }
-        // change filter
+        // each condition can only be used once
         if (filter[param] !== undefined) {
             message.error('Only support one instance for each condition at present');
             return;
         }
+        // change filter
         const tmp1 = {...filter}
         tmp1[param] = value;
         setFilter(tmp1);
@@ -374,10 +379,16 @@ export default function DataRow() {
         )
 
     }
+    const selectSearchInput = (path, setInputValue) => {
+        return <ReferralInput path={path} setInputValue={setInputValue} filter={{limit: 7}}  />
+    }
+    const onInputValueChange = (e) => {
+        console.log(e.target.value);
+        setInputValue(e.target.value);
+    }
     const hasSelected = selectedRowKeys.length > 0;
     return (
         <div>
-            <ReferralInput />
             {
                 updating ? <Update data={updatingData} setDataSource={setDataSource} setUpdating={setUpdating} /> :
                     <div>
@@ -392,7 +403,12 @@ export default function DataRow() {
                                 <Option key={compareOp}>{compareOp}</Option>
                                 ))}
                             </Select>
-                            <Input ref={inputP1} />
+                            {                                  
+                                curParam === 'name' ? selectSearchInput('/plants', setInputValue):
+                                curParam === 'country' ? selectSearchInput('/countries', setInputValue):
+                                curParam === 'fuel' ? selectSearchInput('/fuels', setInputValue):
+                                    <Input type={'number'} onChange={onInputValueChange} ref={inputP1} />
+                            }
                             <Button onClick={onAddFilter} >Add filter</Button>
                         </Space>
                         <br/>

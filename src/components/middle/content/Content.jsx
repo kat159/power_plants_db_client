@@ -35,7 +35,7 @@ export default function NavContent() {
           {/* <Route path='/fuel-usages' element={FuelUsages()} /> */}
           {/* <Route path='/facility-techs' element={FacilityTech()} /> */}
           <Route path='/fuels/*' element={Fuels()} />
-          <Route path='/plants-fuels/*' element={Plants_Fuels()} />
+          {/* <Route path='/plants-fuels/*' element={Plants_Fuels()} /> */}
           {/* <Route path='/techs' element={Techs()} /> */}
           {/* <Route path='/regions' element={Regions()} /> */}
         </Routes>
